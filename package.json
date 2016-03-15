@@ -1,0 +1,27 @@
+{
+  "name": "apns-checker",
+  "version": "0.1.0",
+  "description": "APNs Checker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/70-10/apns-checker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/70-10/apns-checker/issues"
+  },
+  "homepage": "https://github.com/70-10/apns-checker#readme",
+  "dependencies": {
+    "lodash": "4.6.1",
+    "moment": "2.12.0",
+    "node-uuid": "1.4.7",
+    "winston": "2.2.0"
+  }
+}
