@@ -78,8 +78,8 @@ const sendApns = (credential, notificationBinaryDataList) => {
     logger.profile("socket");
     logger.info("connected");
 
-    for (var i = 0; i < notificationBinaryDataList.length; i++) {
-      socket.write(notificationBinaryDataList[i]);
+    for (var binaryData of notificationBinaryDataList) {
+      socket.write(binaryData);
     }
 
     setTimeout(function() {
