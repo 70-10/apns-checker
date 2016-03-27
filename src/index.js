@@ -89,7 +89,7 @@ const sendApns = (credential, notificationBinaryDataList) => {
 
   socket.once("close", function(hasError) {
     logger.profile("socket");
-    logger.info("closed: error is " + hasError);
+    logger.info(`closed: error is ${hasError}`);
   });
 
   socket.on("data", function(data) {
@@ -97,7 +97,7 @@ const sendApns = (credential, notificationBinaryDataList) => {
     var errorCode = data[1];
     var errorEndpointId = data.readUInt32BE(2);
 
-    logger.warn("data - error_command = " + errorCommand + ", error_code = " + errorCode + ", endpoint_id = " + errorEndpointId);
+    logger.warn(`data - error_command = ${errorCommand}, error_code = ${errorCode}, endpoint_id = ${errorEndpointId}`);
   });
 
   socket.on("error", function(err) {
@@ -131,7 +131,8 @@ var message = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 var notificationList = _.times(config.REQUEST_COUNT, () => createNotification(message));
 var binaryDataList = _.map(notificationList, createBinaryData);
 var requestDataSize = _.reduce(binaryDataList, (total, n) => total + n.length, 0);
-logger.info("notification count is " + notificationList.length);
-logger.info("request data size = " + requestDataSize);
+
+logger.info(`notification count is ${notificationList.length}`);
+logger.info(`request data size = ${requestDataSize}`);
 
 sendApns(credential, binaryDataList);
