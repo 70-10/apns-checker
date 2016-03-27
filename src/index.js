@@ -72,9 +72,9 @@ const binaryInterface = (notification, token, endpointId) => {
 };
 
 const sendApns = (credential, notificationBinaryDataList) => {
-  var socket = tls.connect(config.APNS_PORT, config.APNS_HOST_SANDBOX, credential, function() {});
+  var socket = tls.connect(config.APNS_PORT, config.APNS_HOST_SANDBOX, credential, () => {});
 
-  socket.on("connect", function() {
+  socket.on("connect", () => {
     logger.profile("socket");
     logger.info("connected");
 
@@ -82,17 +82,15 @@ const sendApns = (credential, notificationBinaryDataList) => {
       socket.write(binaryData);
     }
 
-    setTimeout(function() {
-      socket.end();
-    }, 5000);
+    setTimeout(() => socket.end(), 5000);
   });
 
-  socket.once("close", function(hasError) {
+  socket.once("close", hasError => {
     logger.profile("socket");
     logger.info(`closed: error is ${hasError}`);
   });
 
-  socket.on("data", function(data) {
+  socket.on("data", data => {
     var errorCommand = data[0];
     var errorCode = data[1];
     var errorEndpointId = data.readUInt32BE(2);
@@ -100,7 +98,7 @@ const sendApns = (credential, notificationBinaryDataList) => {
     logger.warn(`data - error_command = ${errorCommand}, error_code = ${errorCode}, endpoint_id = ${errorEndpointId}`);
   });
 
-  socket.on("error", function(err) {
+  socket.on("error", err => {
     if (err) {
       logger.error(err);
     }
